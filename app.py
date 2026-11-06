@@ -49,12 +49,12 @@ st.subheader("🦠 Top 5 Major Diseases Burden & Distribution")
 st.dataframe(df_diseases, use_container_width=True)
 
 st.markdown("### 📈 Disease Distribution Visual Chart")
-chart_data = df_diseases.set_index("Disease Name")[["Over 5 (Male)", "Over 5 (Female)", "Under 5 (Male)", "Under 5 (Female)"]]
-st.bar_chart(chart_data)
+chart_data_diseases = df_diseases.set_index("Disease Name")[["Over 5 (Male)", "Over 5 (Female)", "Under 5 (Male)", "Under 5 (Female)"]]
+st.bar_chart(chart_data_diseases)
 
 st.markdown("---")
 
-# --- 3. NUTRITION SCREENING ANALYSIS ---
+# --- 3. NUTRITION SCREENING ANALYSIS & CHARTS ---
 st.subheader("🥗 Nutrition Screening & Malnutrition Status (Total: 300 Screened)")
 
 col_n1, col_n2, col_n3, col_n4 = st.columns(4)
@@ -64,15 +64,18 @@ col_n3.metric("MAM (Moderate)", "190 (63.3%)", "M: 80 | F: 110")
 col_n4.metric("SAM (Severe)", "25 (8.3%)", "M: 10 | F: 15")
 
 nutrition_data = {
-    "Nutritional Status": ["Normal", "MAM (Moderate Acute Malnutrition)", "SAM (Severe Acute Malnutrition)", "Total"],
-    "Male": [40, 80, 10, 130],
-    "Female": [45, 110, 15, 170],
-    "Total Count": [85, 190, 25, 300],
-    "Percentage (%)": ["28.3%", "63.3%", "8.3%", "100.0%"]
+    "Nutritional Status": ["Normal", "MAM (Moderate)", "SAM (Severe)"],
+    "Male": [40, 80, 10],
+    "Female": [45, 110, 15]
 }
 
 df_nutrition = pd.DataFrame(nutrition_data)
 st.table(df_nutrition)
+
+# Visualizing Nutrition with a Bar Chart
+st.markdown("### 📊 Nutrition Screening Visual Chart (Male vs Female)")
+chart_data_nutrition = df_nutrition.set_index("Nutritional Status")
+st.bar_chart(chart_data_nutrition)
 
 # --- 4. EXPORT & DOWNLOAD REPORT BUTTON ---
 st.markdown("---")
