@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
 
 # Page Configuration
 st.set_page_config(
@@ -10,20 +9,22 @@ st.set_page_config(
 )
 
 # App Header
-st.title("🏥 Jirjir Health Centre - Data Health Management & Analysis")
-st.markdown("### Monthly Report: November 2026")
+st.title("🏥 Jirjir Health Centre - Health Intelligence")
+st.markdown("### Monthly Data Management & Analysis — November 2026")
 st.markdown("---")
 
-# 1. OPD Summary Metrics
+# --- 1. OPD SUMMARY METRICS ---
 st.subheader("📊 OPD Visits Overview")
-col1, col2, col3 = st.columns(3)
-col1.metric("Total OPD Visitors", "255", "November 2026")
+
+col1, col2, col3, col4 = st.columns(4)
+col1.metric("Total Visitors", "255", "100%")
 col2.metric("OPD Over 5 Years", "130", "Male: 60 | Female: 70")
 col3.metric("OPD Under 5 Years", "125", "Male: 65 | Female: 60")
+col4.metric("Status", "Verified", "✅ Active")
 
 st.markdown("---")
 
-# 2. 5 Major Diseases Analysis Table
+# --- 2. 5 MAJOR DISEASES ANALYSIS ---
 st.subheader("🦠 Top 5 Major Diseases Breakdown")
 
 diseases_data = {
@@ -35,33 +36,46 @@ diseases_data = {
 }
 
 df_diseases = pd.DataFrame(diseases_data)
+
+# Calculate Total Cases
+df_diseases["Total Cases"] = (
+    df_diseases["Over 5 (Male)"] + df_diseases["Over 5 (Female)"] + 
+    df_diseases["Under 5 (Male)"] + df_diseases["Under 5 (Female)"]
+)
+
 st.dataframe(df_diseases, use_container_width=True)
-
-# Visualizing Diseases with a Bar Chart
-st.markdown("### 📈 Disease Distribution Chart")
-df_chart = df_diseases.set_index("Disease Name")
-st.bar_chart(df_chart)
-
 st.markdown("---")
 
-# 3. Nutrition Screening Analysis
+# --- 3. NUTRITION SCREENING ANALYSIS ---
 st.subheader("🥗 Nutrition Screening (Total: 300 Screened)")
 
-col_n1, col_n2, col_n3 = st.columns(3)
-col_n1.metric("Normal Status", "85", "Male: 40 | Female: 45")
-col_n2.metric("MAM (Moderate)", "190", "Male: 80 | Female: 110")
-col_n3.metric("SAM (Severe)", "25", "Male: 10 | Female: 15")
+col_n1, col_n2, col_n3, col_n4 = st.columns(4)
+col_n1.metric("Screened", "300", "100%")
+col_n2.metric("Normal", "85 (28.3%)", "M: 40 | F: 45")
+col_n3.metric("MAM", "190 (63.3%)", "M: 80 | F: 110")
+col_n4.metric("SAM", "25 (8.3%)", "M: 10 | F: 15")
 
 nutrition_data = {
-    "Nutritional Status": ["Normal", "MAM", "SAM", "Total Screened"],
+    "Nutritional Status": ["Normal", "MAM (Moderate Acute Malnutrition)", "SAM (Severe Acute Malnutrition)", "Total"],
     "Male": [40, 80, 10, 130],
     "Female": [45, 110, 15, 170],
-    "Total": [85, 190, 25, 300]
+    "Total Count": [85, 190, 25, 300],
+    "Percentage (%)": ["28.3%", "63.3%", "8.3%", "100.0%"]
 }
 
 df_nutrition = pd.DataFrame(nutrition_data)
 st.table(df_nutrition)
 
+# --- 4. DOWNLOAD REPORT ---
+st.markdown("---")
+csv_data = df_diseases.to_csv(index=False).encode('utf-8')
+st.download_button(
+    label="📥 Download Disease Report (CSV)",
+    data=csv_data,
+    file_name='Jirjir_Health_Diseases_Nov_2026.csv',
+    mime='text/csv',
+)
+
 # Footer
 st.markdown("---")
-st.markdown("<p style='text-align: center; color: gray;'>Jirjir Health Centre Data Analytics Dashboard — November 2026</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: gray;'>Jirjir Health Centre Intelligence Platform — November 2026</p>", unsafe_allow_html=True)
