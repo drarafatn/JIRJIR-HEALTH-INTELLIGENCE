@@ -13,13 +13,10 @@ st.title("🏥 Jirjir Health Centre - Advanced Health Intelligence")
 st.markdown("### Monthly Data Management & Clinical Analysis Report — November 2026")
 st.markdown("---")
 
-# --- SIDEBAR CONTROLS ---
-st.sidebar.header("⚙️ Dashboard Controls & Filters")
-selected_centre = st.sidebar.selectbox("Select Health Facility", ["Jirjir Health Centre", "Xawadle Health Centre", "Qulujeed Health Centre"])
+# --- SIDEBAR INFO ---
+st.sidebar.header("⚙️ Dashboard Controls")
 selected_month = st.sidebar.selectbox("Select Reporting Period", ["November 2026", "October 2026", "September 2026"])
-
-st.sidebar.markdown("---")
-st.sidebar.info("💡 **Enterprise System:** Compliant with regional health standards and real-time clinical metrics.")
+st.sidebar.info("💡 **Facility:** Jirjir Health Centre\n\nCompliant with regional health standards and real-time clinical metrics.")
 
 # --- DATASETS ---
 diseases_data = {
@@ -37,7 +34,7 @@ df_diseases["Total Cases"] = (
 )
 
 # --- 1. OPD SUMMARY METRICS ---
-st.subheader(f"📊 OPD Visits Overview ({selected_centre})")
+st.subheader("📊 OPD Visits Overview (Jirjir Health Centre)")
 
 col1, col2, col3, col4 = st.columns(4)
 col1.metric("Total Visitors", "255", "100%")
