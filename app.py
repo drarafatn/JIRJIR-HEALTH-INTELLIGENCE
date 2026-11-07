@@ -11,7 +11,7 @@ st.set_page_config(
 # Custom CSS for World-Class UI
 st.markdown("""
     <style>
-    .main-header {font-size: 2rem; color: #1E3A8A; font-weight: 700;}
+    .main-header {font-size: 2.0rem; color: #1E3A8A; font-weight: 700;}
     .sub-header {font-size: 1.1rem; color: #475569; font-weight: 500;}
     </style>
 """, unsafe_allow_html=True)
