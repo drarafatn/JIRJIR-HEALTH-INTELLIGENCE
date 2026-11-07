@@ -8,15 +8,30 @@ st.set_page_config(
     layout="wide"
 )
 
+# Custom CSS for World-Class UI & Mobile Responsiveness
+st.markdown("""
+    <style>
+    .main-header {font-size: 2rem; color: #1E3A8A; font-weight: 700;}
+    .sub-header {font-size: 1.1rem; color: #475569; font-weight: 500;}
+    </style>
+""", unsafe_allow_html=True)
+
 # App Header
 st.title("🏥 Jirjir Health Centre - Advanced Health Intelligence")
 st.markdown("### Monthly Data Management & Clinical Analysis Report — November 2026")
 st.markdown("---")
 
-# --- SIDEBAR INFO ---
-st.sidebar.header("⚙️ Dashboard Controls")
-selected_month = st.sidebar.selectbox("Select Reporting Period", ["November 2026", "October 2026", "September 2026"])
-st.sidebar.info("💡 **Facility:** Jirjir Health Centre\n\nCompliant with regional health standards and real-time clinical metrics.")
+# --- WORLD-CLASS TOP CONTROL PANEL (Mobile & Desktop Friendly) ---
+st.markdown("#### ⚙️ Enterprise Dashboard Control Panel")
+ctrl_col1, ctrl_col2, ctrl_col3 = st.columns(3)
+with ctrl_col1:
+    selected_month = st.selectbox("📅 Reporting Period", ["November 2026", "October 2026", "September 2026"])
+with ctrl_col2:
+    facility_status = st.selectbox("🏥 Facility Status", ["Active & Verified", "Pending Review"])
+with ctrl_col3:
+    data_source = st.selectbox("📊 Data Stream", ["OPD & Nutrition Registry", "Full Clinical Archive"])
+
+st.markdown("---")
 
 # --- DATASETS ---
 diseases_data = {
@@ -40,7 +55,7 @@ col1, col2, col3, col4 = st.columns(4)
 col1.metric("Total Visitors", "255", "100%")
 col2.metric("OPD Over 5 Years", "130", "Male: 60 | Female: 70")
 col3.metric("OPD Under 5 Years", "125", "Male: 65 | Female: 60")
-col4.metric("Reporting Status", "Verified", "✅ Active")
+col4.metric("Reporting Status", facility_status, "✅ Verified")
 
 st.markdown("---")
 
