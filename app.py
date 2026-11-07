@@ -36,13 +36,19 @@ with ctrl_col2:
 
 st.markdown("---")
 
-# --- DATASETS (Pneumonia placed first as requested) ---
+# --- DATASETS (Ordered strictly as requested) ---
 diseases_data = {
-    "Disease Name": ["Pneumonia", "ARI", "Acute Watery Diarrhoea", "UTI", "Unknown Fever"],
-    "Over 5 (Male)": [17, 15, 5, 5, 4],
-    "Over 5 (Female)": [15, 13, 7, 6, 3],
-    "Under 5 (Male)": [14, 10, 7, 1, 4],
-    "Under 5 (Female)": [12, 13, 9, 2, 3]
+    "Disease Name": [
+        "1. Pneumonia", 
+        "2. ARI", 
+        "3. Acute Watery Diarrhoea", 
+        "4. Unknown Fever", 
+        "5. UTI"
+    ],
+    "Over 5 (Male)": [17, 15, 5, 4, 5],
+    "Over 5 (Female)": [15, 13, 7, 3, 6],
+    "Under 5 (Male)": [14, 10, 7, 4, 1],
+    "Under 5 (Female)": [12, 13, 9, 3, 2]
 }
 
 df_diseases = pd.DataFrame(diseases_data)
@@ -94,22 +100,4 @@ if selected_view in ["Full Comprehensive Dashboard", "3. Nutrition Screening & A
     st.table(df_nutrition)
 
     st.markdown("### 📊 Nutrition Screening Visual Chart (Male vs Female)")
-    chart_data_nutrition = df_nutrition.set_index("Nutritional Status")
-    st.bar_chart(chart_data_nutrition)
-
-    st.markdown("---")
-
-# --- EXPORT & DOWNLOAD REPORT BUTTON ---
-st.subheader("📥 Export & Share Reports")
-
-csv_data = df_diseases.to_csv(index=False).encode('utf-8')
-st.download_button(
-    label="Download November 2026 Disease Report (CSV)",
-    data=csv_data,
-    file_name='Jirjir_Health_Diseases_November_2026.csv',
-    mime='text/csv',
-)
-
-# Footer
-st.markdown("---")
-st.markdown("<p style='text-align: center; color: gray;'>Jirjir Health Centre Intelligence Platform — World-Class Healthcare Analytics Suite © 2026</p>", unsafe_allow_html=True)
+    chart_data_nutrition = df
