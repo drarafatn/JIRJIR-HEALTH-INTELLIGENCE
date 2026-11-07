@@ -8,14 +8,6 @@ st.set_page_config(
     layout="wide"
 )
 
-# Custom CSS for World-Class UI
-st.markdown("""
-    <style>
-    .main-header {font-size: 2.0rem; color: #1E3A8A; font-weight: 700;}
-    .sub-header {font-size: 1.1rem; color: #475569; font-weight: 500;}
-    </style>
-""", unsafe_allow_html=True)
-
 # App Header
 st.title("🏥 Jirjir Health Centre - Advanced Health Intelligence")
 st.markdown("### Monthly Data Management & Clinical Analysis Report — November 2026")
@@ -44,13 +36,13 @@ with ctrl_col2:
 
 st.markdown("---")
 
-# --- DATASETS ---
+# --- DATASETS (Pneumonia placed first as requested) ---
 diseases_data = {
-    "Disease Name": ["ARI", "Pneumonia", "Acute Watery Diarrhoea", "Unknown Fever", "UTI"],
-    "Over 5 (Male)": [15, 17, 5, 4, 5],
-    "Over 5 (Female)": [13, 15, 7, 3, 6],
-    "Under 5 (Male)": [10, 14, 7, 4, 1],
-    "Under 5 (Female)": [13, 12, 9, 3, 2]
+    "Disease Name": ["Pneumonia", "ARI", "Acute Watery Diarrhoea", "UTI", "Unknown Fever"],
+    "Over 5 (Male)": [17, 15, 5, 5, 4],
+    "Over 5 (Female)": [15, 13, 7, 6, 3],
+    "Under 5 (Male)": [14, 10, 7, 1, 4],
+    "Under 5 (Female)": [12, 13, 9, 2, 3]
 }
 
 df_diseases = pd.DataFrame(diseases_data)
@@ -76,7 +68,7 @@ if selected_view in ["Full Comprehensive Dashboard", "2. Top 5 Major Diseases & 
     st.subheader("🦠 Top 5 Major Diseases Burden & Distribution")
     st.dataframe(df_diseases, use_container_width=True)
 
-    st.markdown("### 📈 Disease Distribution Visual Chart")
+    st.markdown("### 📈 Disease Distribution Visual Chart (Pneumonia First)")
     chart_data_diseases = df_diseases.set_index("Disease Name")[["Over 5 (Male)", "Over 5 (Female)", "Under 5 (Male)", "Under 5 (Female)"]]
     st.bar_chart(chart_data_diseases)
 
